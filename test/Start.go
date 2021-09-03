@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"gcmd2"
+	"github.com/PeterYangs/gcmd2"
 	"log"
 )
 

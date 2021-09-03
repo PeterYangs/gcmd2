@@ -3,7 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"gcmd2"
+	"github.com/PeterYangs/gcmd2"
+
 	"log"
 )
 
