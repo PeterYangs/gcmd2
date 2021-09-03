@@ -84,6 +84,29 @@ func (g *gcmd2) Start() error {
 	return g.cmd.Wait()
 }
 
+func (g *gcmd2) GetOutPipe() (io.ReadCloser, error) {
+
+	return g.cmd.StdoutPipe()
+}
+
+func (g *gcmd2) GetErrPipe() (io.ReadCloser, error) {
+
+	return g.cmd.StderrPipe()
+}
+
+func (g *gcmd2) StartNotOut() error {
+
+	err := g.cmd.Start()
+
+	if err != nil {
+
+		return err
+	}
+
+	return g.cmd.Wait()
+
+}
+
 // StartNoWait 非阻塞，相当于后台运行
 func (g *gcmd2) StartNoWait() error {
 
