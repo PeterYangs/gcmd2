@@ -1,4 +1,4 @@
-#gcmd2
+# gcmd2
 
 安装
 ```shell
