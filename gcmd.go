@@ -44,15 +44,19 @@ func NewCommand(command string, cxt context.Context) *gcmd2 {
 }
 
 // SetSystemEnv 设置系统环境变量
-func (g *gcmd2) SetSystemEnv() {
+func (g *gcmd2) SetSystemEnv() *gcmd2 {
 
 	g.cmd.Env = os.Environ()
+
+	return g
 }
 
 // SetEnv 设置环境变量
-func (g *gcmd2) SetEnv(env []string) {
+func (g *gcmd2) SetEnv(env []string) *gcmd2 {
 
 	g.cmd.Env = env
+
+	return g
 }
 
 func (g *gcmd2) CombinedOutput() ([]byte, error) {
