@@ -91,5 +91,17 @@ func main() {
 }
 
 ```
+设置环境变量
+```go
+
+cmd := gcmd2.NewCommand("php index.php", context.TODO())
+
+//当前进程环境变量
+cmd.SetSystemEnv()
+
+//自定义环境变量
+cmd.SetEnv([]string{"key=value"})
+
+```
 
 
