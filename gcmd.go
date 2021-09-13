@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"os"
 	"os/exec"
 	"runtime"
 )
@@ -40,6 +41,18 @@ func NewCommand(command string, cxt context.Context) *gcmd2 {
 		command: command,
 		cmd:     cmd,
 	}
+}
+
+// SetSystemEnv 设置系统环境变量
+func (g *gcmd2) SetSystemEnv() {
+
+	g.cmd.Env = os.Environ()
+}
+
+// SetEnv 设置环境变量
+func (g *gcmd2) SetEnv(env []string) {
+
+	g.cmd.Env = env
 }
 
 func (g *gcmd2) CombinedOutput() ([]byte, error) {
