@@ -11,13 +11,13 @@ import (
 	"runtime"
 )
 
-type gcmd2 struct {
+type Gcmd2 struct {
 	cxt     context.Context
 	command string
 	cmd     *exec.Cmd
 }
 
-func NewCommand(command string, cxt context.Context) *gcmd2 {
+func NewCommand(command string, cxt context.Context) *Gcmd2 {
 
 	sysType := runtime.GOOS
 
@@ -36,7 +36,7 @@ func NewCommand(command string, cxt context.Context) *gcmd2 {
 
 	}
 
-	return &gcmd2{
+	return &Gcmd2{
 		cxt:     cxt,
 		command: command,
 		cmd:     cmd,
@@ -44,7 +44,7 @@ func NewCommand(command string, cxt context.Context) *gcmd2 {
 }
 
 // SetSystemEnv 设置系统环境变量
-func (g *gcmd2) SetSystemEnv() *gcmd2 {
+func (g *Gcmd2) SetSystemEnv() *Gcmd2 {
 
 	g.cmd.Env = os.Environ()
 
@@ -52,14 +52,14 @@ func (g *gcmd2) SetSystemEnv() *gcmd2 {
 }
 
 // SetEnv 设置环境变量
-func (g *gcmd2) SetEnv(env []string) *gcmd2 {
+func (g *Gcmd2) SetEnv(env []string) *Gcmd2 {
 
 	g.cmd.Env = env
 
 	return g
 }
 
-func (g *gcmd2) CombinedOutput() ([]byte, error) {
+func (g *Gcmd2) CombinedOutput() ([]byte, error) {
 
 	if g.cmd == nil {
 
@@ -71,7 +71,7 @@ func (g *gcmd2) CombinedOutput() ([]byte, error) {
 }
 
 // Start StartBlock 阻塞等待并输出
-func (g *gcmd2) Start() error {
+func (g *Gcmd2) Start() error {
 
 	outIo, err := g.cmd.StdoutPipe()
 
@@ -80,6 +80,7 @@ func (g *gcmd2) Start() error {
 		return err
 	}
 
+	//实时输出
 	go getOut(outIo)
 
 	errIo, err := g.cmd.StderrPipe()
@@ -89,6 +90,7 @@ func (g *gcmd2) Start() error {
 		return err
 	}
 
+	//实时输出
 	go getOut(errIo)
 
 	err = g.cmd.Start()
@@ -101,17 +103,17 @@ func (g *gcmd2) Start() error {
 	return g.cmd.Wait()
 }
 
-func (g *gcmd2) GetOutPipe() (io.ReadCloser, error) {
+func (g *Gcmd2) GetOutPipe() (io.ReadCloser, error) {
 
 	return g.cmd.StdoutPipe()
 }
 
-func (g *gcmd2) GetErrPipe() (io.ReadCloser, error) {
+func (g *Gcmd2) GetErrPipe() (io.ReadCloser, error) {
 
 	return g.cmd.StderrPipe()
 }
 
-func (g *gcmd2) StartNotOut() error {
+func (g *Gcmd2) StartNotOut() error {
 
 	err := g.cmd.Start()
 
@@ -125,7 +127,7 @@ func (g *gcmd2) StartNotOut() error {
 }
 
 // StartNoWait 非阻塞，相当于后台运行
-func (g *gcmd2) StartNoWait() error {
+func (g *Gcmd2) StartNoWait() error {
 
 	err := g.cmd.Start()
 
