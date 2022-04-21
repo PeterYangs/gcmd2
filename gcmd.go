@@ -135,6 +135,11 @@ func (g *Gcmd2) StartNoWait() error {
 
 }
 
+func (g *Gcmd2) GetCmd() *exec.Cmd {
+
+	return g.cmd
+}
+
 func getOut(st io.ReadCloser) {
 
 	defer st.Close()
