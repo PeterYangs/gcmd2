@@ -26,7 +26,7 @@ func NewCommand(command string, cxt context.Context) *Gcmd2 {
 	// linux/mac
 	if sysType == "linux" || sysType == "darwin" {
 
-		cmd = exec.CommandContext(cxt, "bash", "-c", command)
+		cmd = exec.CommandContext(cxt, "/bin/bash", "-c", command)
 	}
 
 	// windows
