@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"os/exec"
 	"runtime"
@@ -135,6 +134,29 @@ func (g *Gcmd2) StartNoWait() error {
 
 }
 
+func (g Gcmd2) StartNoWaitOutErr() error {
+
+	errIo, err := g.cmd.StderrPipe()
+
+	if err != nil {
+
+		return err
+	}
+
+	//实时输出
+	go getOut(errIo)
+
+	err = g.cmd.Start()
+
+	if err != nil {
+
+		return err
+	}
+
+	return nil
+
+}
+
 func (g *Gcmd2) GetCmd() *exec.Cmd {
 
 	return g.cmd
@@ -157,7 +179,7 @@ func getOut(st io.ReadCloser) {
 				return
 			}
 
-			log.Println(readErr)
+			//log.Println(readErr)
 
 			return
 		}

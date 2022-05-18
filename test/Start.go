@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/PeterYangs/gcmd2"
 	"log"
+	"time"
 )
 
 func main() {
@@ -19,4 +20,6 @@ func main() {
 		return
 
 	}
+
+	time.Sleep(10 * time.Second)
 }
