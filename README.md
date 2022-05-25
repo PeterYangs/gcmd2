@@ -1,11 +1,11 @@
 # gcmd2
 
-安装
+#### 安装
 ```shell
 go get github.com/PeterYangs/gcmd2
 ```
 
-阻塞获取输出
+#### 阻塞获取输出
 ```go
 package main
 
@@ -37,7 +37,7 @@ func main() {
 
 ```
 
-阻塞获取实时输出
+#### 阻塞获取实时输出
 ```go
 package main
 
@@ -64,7 +64,7 @@ func main() {
 
 ```
 
-非阻塞（后台运行模式）
+#### 非阻塞（后台运行模式）
 ```go
 package main
 
@@ -91,7 +91,7 @@ func main() {
 }
 
 ```
-设置环境变量
+#### 设置环境变量
 ```go
 
 cmd := gcmd2.NewCommand("php index.php", context.TODO())
@@ -101,6 +101,39 @@ cmd.SetSystemEnv()
 
 //自定义环境变量
 cmd.SetEnv([]string{"key=value"})
+
+```
+
+#### 设置运行用户
+仅在linux下可用，其他平台会编译出错
+```go
+package main
+
+import (
+	"context"
+	"github.com/PeterYangs/gcmd2"
+	"log"
+	"time"
+)
+
+func main() {
+
+	cmd := gcmd2.NewCommand("/usr/local/bin/php index.php", context.TODO())
+
+	cmd.SetUser("nginx")
+
+	err := cmd.Start()
+
+	if err != nil {
+
+		log.Println(err)
+
+		return
+
+	}
+
+	time.Sleep(10 * time.Second)
+}
 
 ```
 

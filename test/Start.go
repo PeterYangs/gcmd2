@@ -9,7 +9,9 @@ import (
 
 func main() {
 
-	cmd := gcmd2.NewCommand("php index.php", context.TODO())
+	cmd := gcmd2.NewCommand("/usr/local/bin/php index.php", context.TODO())
+
+	cmd.SetUser("nginx")
 
 	err := cmd.Start()
 

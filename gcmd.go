@@ -14,6 +14,7 @@ type Gcmd2 struct {
 	cxt     context.Context
 	command string
 	cmd     *exec.Cmd
+	user    string
 }
 
 func NewCommand(command string, cxt context.Context) *Gcmd2 {
