@@ -105,7 +105,7 @@ cmd.SetEnv([]string{"key=value"})
 ```
 
 #### 设置运行用户
-仅在linux下可用，其他平台会编译出错
+仅在linux下可用
 ```go
 package main
 
