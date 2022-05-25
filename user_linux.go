@@ -4,7 +4,6 @@ package gcmd2
 
 import (
 	"os/user"
-	"runtime"
 	"strconv"
 	"syscall"
 )
@@ -51,13 +50,7 @@ func getSysProcAttr() *syscall.SysProcAttr {
 // SetUser 设置运行用户
 func (g *Gcmd2) SetUser(user string) *Gcmd2 {
 
-	//g.user = user
-	sysType := runtime.GOOS
-
-	if sysType == "linux" {
-
-		g.withSysProcAttr(user)
-	}
+	g.withSysProcAttr(user)
 
 	return g
 }
